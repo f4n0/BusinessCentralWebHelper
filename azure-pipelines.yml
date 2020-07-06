@@ -6,6 +6,9 @@
 trigger:
 - master
 
+pool:
+  vmImage: 'windows-latest'
+
 steps:
 - task: createbccontainer@4
   inputs:
