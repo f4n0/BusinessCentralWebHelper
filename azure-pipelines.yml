@@ -6,14 +6,13 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: createbccontainer@4
+  inputs:
+    containername: 'BC'
+    artifactUrl: 'https://bcartifacts.azureedge.net/onprem/14.0.29537.0/w1'
+    isolation: 'default'
+    fastcontainer: true
+- task: CompileBCApps@2
+  inputs:
+    ContainerName: 'BC'
+    Auth: 'Windows'
