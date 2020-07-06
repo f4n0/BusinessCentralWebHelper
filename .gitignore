@@ -1,0 +1,5 @@
+.al*
+.vs*
+*.app
+*.orig
+*.Gimli*
