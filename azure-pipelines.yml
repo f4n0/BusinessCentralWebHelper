@@ -6,6 +6,7 @@
 trigger:
 - master
 
+steps:
 - task: createbccontainer@4
   inputs:
     containername: 'BC'
