@@ -3,7 +3,7 @@ page 99980 "BWH Active Sessions"
     Caption = 'Active Sessions (BWH)';
     PageType = List;
     ApplicationArea = All;
-    UsageCategory = Administration;
+    UsageCategory = Lists;
     SourceTable = "Active Session";
     Permissions = tabledata "Active Session" = rmid;
     Editable = false;
