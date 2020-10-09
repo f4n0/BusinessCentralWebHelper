@@ -5,6 +5,7 @@ page 99980 "BWH Active Sessions"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "Active Session";
+    Permissions = tabledata "Active Session" = rmid;
     Editable = false;
 
     layout
@@ -13,47 +14,47 @@ page 99980 "BWH Active Sessions"
         {
             repeater(Rpt1)
             {
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = All;
                 }
-                field("User SID"; "User SID")
+                field("User SID"; Rec."User SID")
                 {
                     ApplicationArea = All;
                 }
-                field("Session ID"; "Session ID")
+                field("Session ID"; Rec."Session ID")
                 {
                     ApplicationArea = All;
                 }
-                field("Server Instance Name"; "Server Instance Name")
+                field("Server Instance Name"; Rec."Server Instance Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Client Computer Name"; "Client Computer Name")
+                field("Client Computer Name"; Rec."Client Computer Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Client Type"; "Client Type")
+                field("Client Type"; Rec."Client Type")
                 {
                     ApplicationArea = All;
                 }
-                field("Database Name"; "Database Name")
+                field("Database Name"; Rec."Database Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Login Datetime"; "Login Datetime")
+                field("Login Datetime"; Rec."Login Datetime")
                 {
                     ApplicationArea = All;
                 }
-                field("Server Computer Name"; "Server Computer Name")
+                field("Server Computer Name"; Rec."Server Computer Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Server Instance ID"; "Server Instance ID")
+                field("Server Instance ID"; Rec."Server Instance ID")
                 {
                     ApplicationArea = All;
                 }
-                field("Session Unique ID"; "Session Unique ID")
+                field("Session Unique ID"; Rec."Session Unique ID")
                 {
                     ApplicationArea = All;
                 }
@@ -77,14 +78,20 @@ page 99980 "BWH Active Sessions"
 
                 trigger OnAction()
                 var
+                    ActiveSession: Record "Active Session";
                     Continue: Label 'Are you sure to kill: %1 ?';
                     Killer: Label 'Your session has been killed by: %1';
+
                 begin
-                    if Confirm(StrSubstNo(Continue, "User ID"), true) then
-                        StopSession("Session ID", StrSubstNo(Killer, UserId()))
+                    if not Confirm(StrSubstNo(Continue, Rec."User ID"), true) then exit;
+
+                    if not StopSession(Rec."Session ID", StrSubstNo(Killer, UserId())) then begin
+                        Rec.Delete(true);
+                    end;
                 end;
             }
         }
     }
+
 
 }

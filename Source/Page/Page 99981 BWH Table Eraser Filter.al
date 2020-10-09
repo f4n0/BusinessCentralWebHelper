@@ -13,11 +13,11 @@ page 99981 "BWH Table Eraser Filter"
         {
             repeater(General)
             {
-                field("Field No."; "Field No.")
+                field("Field No."; Rec."Field No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Field Name"; "Field Name")
+                field("Field Name"; Rec."Field Name")
                 {
                     ApplicationArea = All;
 
@@ -26,14 +26,14 @@ page 99981 "BWH Table Eraser Filter"
                         Field: Record Field;
                         FieldSelection: Codeunit "Field Selection";
                     begin
-                        Field.SetRange(TableNo, "Table ID");
+                        Field.SetRange(TableNo, Rec."Table ID");
                         if FieldSelection.Open(Field) then
-                            Validate("Field No.", Field."No.");
+                            Rec.Validate("Field No.", Field."No.");
 
                         CurrPage.Update();
                     end;
                 }
-                field(Filter; Filter)
+                field(Filter; Rec.Filter)
                 {
                     ApplicationArea = All;
                 }
