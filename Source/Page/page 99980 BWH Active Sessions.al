@@ -14,6 +14,10 @@ page 99980 "BWH Active Sessions"
         {
             repeater(Rpt1)
             {
+                field("Current Session"; (Rec."Session ID" = SessionId()))
+                {
+                    ApplicationArea = all;
+                }
                 field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = All;
